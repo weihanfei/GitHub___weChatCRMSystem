@@ -24,7 +24,7 @@ public class ImageUtil {
 		
 		File file = FileUtil.file(strPath);
 		ImgUtil.pressText(//
-				FileUtil.file("D:\\test\\haiBao.png"), //海报源地址
+				FileUtil.file("../../img/haiBao.png"), //海报源地址
 				file,  //目标地址
 			    "", Color.black, //文字
 			    new Font("黑体", Font.BOLD, 20), //字体

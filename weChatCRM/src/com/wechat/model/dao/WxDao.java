@@ -75,6 +75,12 @@ public class WxDao {
 		case "subscribe" : 
 			String ticket = xmlMap.get("Ticket");
 
+			//写一个客服回复的功能 获取客服的URL
+	        String url = TokenConfig.getCustomerUrl();
+	      //先客服消息回复文本
+	        String	result = TexTemplate.getEventCustomerWithParamslate(xmlMap);
+	        HttpUtil.post(url, result);
+			
 	        //得到存放在内存中的用户头像的图片相对路径
 	        String headPath = MediaConfig.downLoadHeadImg(xmlMap);
 	        //得到存放在内存中的二维码的相对地址
@@ -86,21 +92,10 @@ public class WxDao {
 	        //获取上传图片的media_img
 	        String mediaId = MediaConfig.uploadTempMaterial("image",haiBao);
 	        
-//	        //得到客服消息中上传图片的报文形式
-//	        String result = TexTemplate.getCustomerPictureTemplate(mediaImg, xmlMap);
-//	        
-//        	//将信息封装到URL中，用post提交
-//	        HttpUtil.post(url, result);
+	        //客服回复海报的xml格式的String字符串
+	        String customerResultXml = TexTemplate.getCustomerImgTemplate(mediaId, xmlMap);
 	        
-	        //自动回复海报的xml格式的String字符串
-	        resultXml = TexTemplate.getCustomerImgTemplate(mediaId, xmlMap);
-	        
-
-			//写一个客服回复的功能 获取客服的URL
-	        String url = TokenConfig.getCustomerUrl();
-	      //先客服消息回复文本
-	        String	result = TexTemplate.getEventCustomerWithParamslate(xmlMap);
-	        HttpUtil.post(url, result);
+	        HttpUtil.post(url, customerResultXml);	
 	      
 			if(null!=ticket&&ticket.length()>0) {
 				//未关注，扫描带参数的二维码进行关注
@@ -109,7 +104,8 @@ public class WxDao {
 		        String	customerRusultText = TexTemplate.getEventCustomerRusultTextlate(xmlMap);
 				//提交客服消息
 		        if(xmlMap.get("EventKey")!=null) {
-		        	HttpUtil.post(url, customerRusultText);		
+		        	System.out.println("成功返回了海报");
+		        	HttpUtil.post(url, customerRusultText);	
 		        }
 				
 			}else {

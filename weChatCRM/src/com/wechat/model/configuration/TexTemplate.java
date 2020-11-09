@@ -30,30 +30,6 @@ public class TexTemplate {
 		return template;
 	}
 
-//	//直接关注或者扫描不带参数的二维码关注
-//	public static String getEventWithOutParamslate(Map<String, String> xmlMap) {
-//		String template="<xml>\r\n" + 
-//				"  <ToUserName><![CDATA["+xmlMap.get("FromUserName")+"]]></ToUserName>\r\n" + 
-//				"  <FromUserName><![CDATA["+xmlMap.get("ToUserName")+"]]></FromUserName>\r\n" + 
-//				"  <CreateTime>"+StringUtils.getWxCreateTime()+"</CreateTime>\r\n" + 
-//				"  <MsgType><![CDATA[text]]></MsgType>\r\n" + 
-//				"  <Content><![CDATA["+"欢迎"+TokenConfig.getUserInfoName(xmlMap)+getContent(1)+"]]></Content>\r\n" + 
-//				"</xml>";
-//		return template;
-//	}
-
-	//扫描带参数的二维码进行关注
-//	public static String getEventWithParamslate(Map<String, String> xmlMap) {
-//		String template="<xml>\r\n" + 
-//				"  <ToUserName><![CDATA["+xmlMap.get("FromUserName")+"]]></ToUserName>\r\n" + 
-//				"  <FromUserName><![CDATA["+xmlMap.get("ToUserName")+"]]></FromUserName>\r\n" + 
-//				"  <CreateTime>"+StringUtils.getWxCreateTime()+"</CreateTime>\r\n" + 
-//				"  <MsgType><![CDATA[text]]></MsgType>\r\n" + 
-//				"  <Content><![CDATA["+"欢迎"+TokenConfig.getUserInfoName(xmlMap)+getContent(1)+"带参数"+"]]></Content>\r\n" + 
-//				"</xml>";
-//		return template;
-//	}
-
 	//扫描带参数的二维码，返回参数
 	public static String getEventParams(Map<String, String> xmlMap) {
 		String template="<xml>\r\n" + 
@@ -92,17 +68,17 @@ public class TexTemplate {
 		return result;
 	}
 
-	//被动回复消息的海报格式
+	//客服消息的海报格式
 	public static String getCustomerImgTemplate(String mediaImg, Map<String, String> xmlMap) {
-		String result = "<xml>\r\n" + 
-				"  <ToUserName><![CDATA["+xmlMap.get("FromUserName")+"]]></ToUserName>\r\n" + 
-				"  <FromUserName><![CDATA["+xmlMap.get("ToUserName")+"]]></FromUserName>\r\n" + 
-				"  <CreateTime>12345678</CreateTime>\r\n" + 
-				"  <MsgType><![CDATA[image]]></MsgType>\r\n" + 
-				"  <Image>\r\n" + 
-				"    <MediaId><![CDATA["+mediaImg+"]]></MediaId>\r\n" + 
-				"  </Image>\r\n" + 
-				"</xml>";
+		String result = 
+				"{\r\n" + 
+				"	 \"touser\":\""+xmlMap.get("FromUserName")+"\",\r\n" + 
+				"    \"msgtype\":\"image\",\r\n" + 
+				"    \"image\":\r\n" + 
+				"    {\r\n" + 
+				"      \"media_id\":\""+mediaImg+"\"\r\n" + 
+				"    }\r\n" + 
+				"}";
 		return result;
 	}
 
@@ -135,7 +111,5 @@ public class TexTemplate {
 				"}\r\n" + 
 				"";
 		return result;
-	}
-	
-	
+	}	
 }

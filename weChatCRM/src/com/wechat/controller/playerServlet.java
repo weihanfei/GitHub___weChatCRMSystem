@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wechat.model.configuration.TexTemplate;
 import com.wechat.model.dao.WxDao;
 import com.wechat.utils.SHA1Utils;
 
@@ -55,10 +56,22 @@ public class playerServlet extends HttpServlet {
 //        response.setCharacterEncoding("UTF-8");		
 		//获取微信端的内容
         Map<String,String> xmlMap = WxDao.handleMap(request);
-		//针对内容给微信端做回复响应
-        String responseStr  = WxDao.getResponseStr(xmlMap);
-        //回送给微信服务器
-        response.getWriter().print(responseStr);
+        try {
+			int i = 10 /0;
+		} catch (Exception e) {
+			//先被动回复一个空字符
+			response.getWriter().print("");
+	        response.getWriter().flush();
+	        response.getWriter().close();
+			// TODO: handle exception
+		}finally {
+			//针对内容给微信端做回复响应
+			String responseStr  = WxDao.getResponseStr(xmlMap);
+			//回送给微信服务器
+			response.getWriter().print(responseStr);
+		}
+        
+        
 	}
 
 }
