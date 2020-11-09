@@ -1,4 +1,4 @@
-package com.wechat.utils;
+package com.wechat.test;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,16 +8,24 @@ import java.io.File;
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.FileUtil;
 
-//对海报进行加对应的文字水印和图片水印
-public class ImageUtil {
-	
-	//str --- 用户头像的相对地址  ,,直接将海报的地址写死，直接写上去
-	public static String pressImage(String headPath,String qrcodeImgPath) {
+//测试海报上的二维码图片的缩放以及位置的变化
+public class Test2 {
+
+	public static void main(String[] args) {
+		test();
+//		method2();
+//		method3();
+//		method4();
+	}
+		
+	public static String test() {
+		String qrcodeImgPath = "D:\\test\\ticket.jpg";//二维码图片
+		String headPath = "D:\\test\\okAX050wWWJIdwObc4eCYk_3k1As.jpg";//头像图片
+		
 		String strPath = headPath.substring(0, headPath.lastIndexOf("."))+"1.jpg";
 		File targetfile = FileUtil.file(strPath);
 		
 		//判断这个海报是否存在，存在就直接返回这个strPath这个路径
-		//TODO   判断这个海报是否在临时素材库中是否有效，失效就不执行if语句 
 		if(targetfile.exists()) {
 			return strPath;
 		}
@@ -37,7 +45,7 @@ public class ImageUtil {
 		scaleMethod(qrcodeImgPath,qrcodeImgPath,0.5f);
 		
 		//对头像进行裁剪为园的形状
-//		Test2.cricleMethod(headPath,headPath);
+//		Test2.method3(headPath,headPath);
 		
 		//对头像进行缩放处理
 		scaleMethod(headPath,headPath,0.65f);
@@ -74,7 +82,7 @@ public class ImageUtil {
 	 */
 	
 	//裁剪圆形的图片   返回在本图片上。可以重新生成一张图片
-	public static String cricleMethod(String Path,String targetPath) {
+	public static String method3(String Path,String targetPath) {
 		File imageFile=new File(Path); 
 		Image src = ImgUtil.read(imageFile);
 		Image cricle = ImgUtil.cut(src, 0, 0,0);//得到了进行圆角切割的图片
@@ -99,15 +107,5 @@ public class ImageUtil {
 			);
 		return targetPath;
 	}
-	
-	//创建文件夹如果不存在  主要用于自动在Tomcat运行时创建文件夹img
-	public static void createFiles(File file) {
-		//获取父目录
-		 if(!file.exists()) {
-			 file.mkdirs();
-		 }
-//		 f.getParentFile().mkdirs();
-//		f.createNewFile();  注意这个是创建最后一个路径是文件的方法
-		 
-	}
+
 }
