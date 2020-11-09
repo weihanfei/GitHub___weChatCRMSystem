@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<servlet>
+        <servlet-name>playerServlet</servlet-name>
+        <servlet-class>com.wechat.controller.playerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>playerServlet</servlet-name>
+        <url-pattern>/playerServlet</url-pattern>
+    </servlet-mapping>   
+  
+  <filter>
+      <filter-name>AdvancedFilter</filter-name>
+      <filter-class>com.wechat.filter.AdvancedFilter</filter-class>
+      <init-param>
+         <param-name>charset</param-name>
+         <param-value>UTF-8</param-value>
+     </init-param>
+      <init-param>
+         <param-name>dirtyWord</param-name>
+         <param-value>/WEB-INF/DirtyWord.txt</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+      <filter-name>AdvancedFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+</web-app>
