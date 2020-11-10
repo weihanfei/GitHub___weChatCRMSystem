@@ -13,8 +13,8 @@ import cn.hutool.json.JSONUtil;
 public class TokenConfig {
 	
 	private static String accessTokenUrl="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
-	private static String APPID = "wx3d44d645d21e9618";
-	private static String APPSECRET="ede53bbb65e4870b45ae73ac45e8d756";
+	private static String APPID = "wx35982b7cee34c9bd";
+	private static String APPSECRET="b6f8feb568add91619b38dcb4a9385a3";
 	
 	//客服的URL
 	private  String customerUrl = " https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN";
